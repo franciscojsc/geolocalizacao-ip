@@ -46,20 +46,28 @@
     </script>
 
     <script type="text/javascript">
-       let ipOrURL = 'franciscochaves.com.br';
-        var url = `http://ip-api.com/json/${ipOrURL}`;
+        
+        var btnBuscar = document.querySelector('#btnBuscar');
+        var ip_url = document.querySelector('#ip_url')
 
-        fetch(url)
-        .then(response => response.json())
-        .then((json) => {
-            var template = Handlebars.compile($('#item-template').html())
-            $('#items').html( template(json) )
-        })
-        .catch((err) => {
-            alert('Ocorreu algum erro');
-        });
+        btnBuscar.addEventListener("click", buscarLocalizacao, false);
 
-</script>
+        function buscarLocalizacao() {
+
+            var url = `http://ip-api.com/json/${ip_url.value}`;
+
+            fetch(url)
+            .then(response => response.json())
+            .then((json) => {
+                var template = Handlebars.compile($('#item-template').html())
+                $('#items').html( template(json) )
+            })
+            .catch((err) => {
+                alert('Ocorreu algum erro');
+            });
+        }
+
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
