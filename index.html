@@ -48,13 +48,23 @@
     <script type="text/javascript">
         
         var btnBuscar = document.querySelector('#btnBuscar');
-        var ip_url = document.querySelector('#ip_url')
+
+        function trataURL(urlValues) {
+            var values = urlValues.split('//');
+            if(values.length === 2) {
+                return values[1];
+            } else {
+                return values[0];
+            }
+        }
 
         btnBuscar.addEventListener("click", buscarLocalizacao, false);
 
         function buscarLocalizacao() {
 
-            var url = `http://ip-api.com/json/${ip_url.value}`;
+            var ip_url = document.querySelector('#ip_url').value;
+            ip_url = trataURL(ip_url);
+            var url = `http://ip-api.com/json/${ip_url}`;
 
             fetch(url)
             .then(response => response.json())
