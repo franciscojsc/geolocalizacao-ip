@@ -11,7 +11,28 @@
     
   </head>
   <body>
-    
+
+    <div class="container" >
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <img src="./img/geolocalizacao.png" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">
+            </div>
+        </div>
+        <div class="row" style="margin-top: 20px">
+            <div class="col-xs-6 col-md-6" >
+                    <div class="form-group">
+                      <label for="ip_url">Localizar Servidor</label>
+                      <input type="text"
+                          class="form-control form-control-sm" name="ip_url" id="ip_url" aria-describedby="helpId" placeholder="">
+                      <small id="helpI" class="form-text text-muted">Informe o endereço IP ou a URL</small>
+                      <button type="button" id="btnBuscar" class="btn btn-primary">Buscar</button>
+                    </div>
+            </div>
+            <div class="col-xs-6 col-md-6" >
+                <div id="items">Carregando...</div> 
+            </div>
+        </div>
+    </div>
 
     <script id="item-template" type="text/x-handlebars-template">
         <ul>
@@ -23,8 +44,6 @@
             {{/each}}
         </ul>
     </script>
-
-    <div id="items">Loading...</div>
 
     <script type="text/javascript">
        let ipOrURL = 'franciscochaves.com.br';
