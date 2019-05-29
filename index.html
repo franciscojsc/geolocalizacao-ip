@@ -29,7 +29,7 @@
                     </div>
             </div>
             <div class="col-xs-6 col-md-6" >
-                <div id="items">Carregando...</div> 
+                <div id="items"></div> 
             </div>
         </div>
     </div>
@@ -63,7 +63,12 @@
                 $('#items').html( template(json) )
             })
             .catch((err) => {
-                alert('Ocorreu algum erro');
+                $('#items').html("<div class='alert alert-warning alert-dismissible fade show' role='alert'>"+
+                                    "<strong>Ocorreu algum erro na buscar!!! </strong> Tente novamente."+
+                                    "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>"+
+                                    "<span aria-hidden='true'>&times;</span>"+
+                                    "</button>"+
+                                "</div>")
             });
         }
 
