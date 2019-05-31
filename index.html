@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css">
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
     
   </head>
@@ -32,6 +34,11 @@
                 <div id="items"></div> 
             </div>
         </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <div id="maps"></div>
+            </div>
+        </div>
     </div>
 
     <script id="item-template" type="text/x-handlebars-template">
@@ -45,46 +52,32 @@
         </ul>
     </script>
 
-    <script type="text/javascript">
-        
-        var btnBuscar = document.querySelector('#btnBuscar');
+    <script id="item-template" type="text/x-handlebars-template">
+        <ul>
+            {{#each this as |value key|}}
+                <li>
+                    <span class="badge badge-warning"> {{key}}</span>
+                     : 
+                     <span class="badge badge-success">{{value}}</span></li>
+            {{/each}}
+        </ul>
+    </script>
 
-        function trataURL(urlValues) {
-            var values = urlValues.split('//');
-            if(values.length === 2) {
-                return values[1];
-            } else {
-                return values[0];
-            }
-        }
-
-        btnBuscar.addEventListener("click", buscarLocalizacao, false);
-
-        function buscarLocalizacao() {
-
-            var ip_url = document.querySelector('#ip_url').value;
-            ip_url = trataURL(ip_url);
-            var url = `http://ip-api.com/json/${ip_url}`;
-
-            fetch(url)
-            .then(response => response.json())
-            .then((json) => {
-                var template = Handlebars.compile($('#item-template').html())
-                $('#items').html( template(json) )
-            })
-            .catch((err) => {
-                $('#items').html("<div class='alert alert-warning alert-dismissible fade show' role='alert'>"+
-                                    "<strong>Ocorreu algum erro na buscar!!! </strong> Tente novamente."+
-                                    "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>"+
-                                    "<span aria-hidden='true'>&times;</span>"+
-                                    "</button>"+
-                                "</div>")
-            });
-        }
-
+    <script id="item-template-map" type="text/x-handlebars-template">
+        <div id="map" style="height: 500px;"></div>
+        <script>
+            var latitude = {{this.lat}};
+            var longitude = {{this.lon}};
+            criarMapa(latitude, longitude);
+        </script>
     </script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
+
+    <script type="text/javascript" src="js/map.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+
+    </body>
 </html>
