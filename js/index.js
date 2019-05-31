@@ -21,6 +21,9 @@ function buscarLocalizacao() {
 		.then((json) => {
 			var template = Handlebars.compile($('#item-template').html());
 			$('#items').html(template(json));
+
+			var template = Handlebars.compile($('#item-template-map').html());
+			$('#maps').html(template(json));
 		})
 		.catch((err) => {
 			$('#items').html(
