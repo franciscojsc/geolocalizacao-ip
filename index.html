@@ -45,44 +45,7 @@
         </ul>
     </script>
 
-    <script type="text/javascript">
-        
-        var btnBuscar = document.querySelector('#btnBuscar');
-
-        function trataURL(urlValues) {
-            var values = urlValues.split('//');
-            if(values.length === 2) {
-                return values[1];
-            } else {
-                return values[0];
-            }
-        }
-
-        btnBuscar.addEventListener("click", buscarLocalizacao, false);
-
-        function buscarLocalizacao() {
-
-            var ip_url = document.querySelector('#ip_url').value;
-            ip_url = trataURL(ip_url);
-            var url = `http://ip-api.com/json/${ip_url}`;
-
-            fetch(url)
-            .then(response => response.json())
-            .then((json) => {
-                var template = Handlebars.compile($('#item-template').html())
-                $('#items').html( template(json) )
-            })
-            .catch((err) => {
-                $('#items').html("<div class='alert alert-warning alert-dismissible fade show' role='alert'>"+
-                                    "<strong>Ocorreu algum erro na buscar!!! </strong> Tente novamente."+
-                                    "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>"+
-                                    "<span aria-hidden='true'>&times;</span>"+
-                                    "</button>"+
-                                "</div>")
-            });
-        }
-
-    </script>
+    <script type="text/javascript" src="js/index.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
