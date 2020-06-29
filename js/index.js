@@ -14,7 +14,7 @@ btnBuscar.addEventListener('click', buscarLocalizacao, false);
 function buscarLocalizacao() {
 	var ip_url = document.querySelector('#ip_url').value;
 	ip_url = trataURL(ip_url);
-	var url = `http://ip-api.com/json/${ip_url}`;
+	var url = `https://ip-api.com/json/${ip_url}`;
 
 	fetch(url)
 		.then((response) => response.json())
